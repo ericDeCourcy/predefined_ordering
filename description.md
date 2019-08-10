@@ -26,6 +26,6 @@ While in this state, and after an order is set, either an administrator for the 
 
   ??? could be done with an error system rather than reverts
   
-    ??? how to manage out of gas though???
+  ??? how to manage out of gas though???
     
   ??? could finalize calls in a more general way, constructing some sort of tree describing effects for each call and times. This may add a second, intermediate stage, perhaps called `determine effects`
