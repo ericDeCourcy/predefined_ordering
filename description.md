@@ -17,9 +17,15 @@ While in this state, and after an order is set, either an administrator for the 
 # NOTES
 
 ??? managing transactions that would have been possible, but now are not as things have changed between when they were called and when they are executed in the `finalization` stage
+
   ??? doing so in a gneralized, abstracted way
+  
   ??? doing so in common scenarios, such as games or DEX's
+  
 ??? how to manage reverts in a general way. consider not only explicit reverts, but also "out of gas" calls
+
   ??? could be done with an error system rather than reverts
+  
     ??? how to manage out of gas though???
+    
   ??? could finalize calls in a more general way, constructing some sort of tree describing effects for each call and times. This may add a second, intermediate stage, perhaps called `determine effects`
