@@ -25,4 +25,12 @@ DEX's can be abstracted as an accounting ledger, managing values which represent
 
 ## Assumptions
 
-- The DEX only functions via a "make order" and "take order" structure. There is no order-matching functionality built into the DEX. 
+- The DEX only functions via a "make order" and "take order" structure. There is no order-matching functionality built into the DEX. This allows us to search for interactions/effects via a single order index.
+
+# Algoriddim
+
+## Commit Stage
+
+## reveal Stage
+
+## Process Stage
