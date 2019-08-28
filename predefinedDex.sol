@@ -71,6 +71,10 @@ contract predefinedDex {
 
     
     /// @notice sets all timing parameters for the process and designates contract creator as the admin
+    /// @param _commitBlocks the number of blocks each round users have to commit thier txns
+    /// @param _revealBlocks the number of blocks each user has to reveal their commited txns
+    /// @param _orderRevealBlocks the number of blocks the admin has to reveal the ordering
+    /// @param _processBlocks the number of blocks users have to process thier txns
     function constructor(uint256 _commitBlocks, uint256 _revealBlocks, uint256 _orderRevealBlocks, uint256 _processBlocks) returns (bool)
     {
         commitBlocks = _commitBlocks;
@@ -101,5 +105,22 @@ contract predefinedDex {
         return true;
     }
     
+    /// @notice determines the order of the transaction (txIndex) has based on hash of the transaction and the current orderReveal val
+    /// @dev relies on the orderReveal value so that the transaction's order value cannot be predicted before this
+    /// @dev the lower txIndex is, the earlier the tx is
+    function determineTxnOrder(uint256 _txnHash) public view onlyProcessStage returns (uint256 orderIndex)
+    {
+        return keccak256(abi.encodePacked(_txnHash, orderReveal));
+    }
     
+//TODO: Define all fn's below this line
+    function commitTxn
+    function revealTxn
+    function checkRevealedTxn   //checks that user is able to actually do this transaction. Checked up transaction reveal
+    function checkStake         //checks that the user either has the ability to set a stake given this transaction
+    function processTxn         //callable by ANY user on ANY txn, to disincentivize people commiting tx's they may not want to reveal
+    function takeFee            //callable by admin to take the fee of anyone who doesn't reveal or process, and discards txn
+    function swapFunds          //internal, called on SOME processTxn calls, performs a swap if the txn was successful
+    function checkProcessSuccess    //internal, checks that the txn revealed was actually successful, may call 'swapfunds'
+    function endProcessRound    //increments the round counter and changes current state to start new round
         
