@@ -1,0 +1,1 @@
+Perhaps instead of using logic to check conditions and determine the results after each round, which requires that everyone submit thier commits and significant overhead, just allow people to submit thier claims, and then if someone can prove that thier claim comes BEFORE someone else's, then the original is bumped and the new person is allowed the claim
