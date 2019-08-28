@@ -2,6 +2,8 @@
 
 This scheme has 2 states, the first is the `makeCalls` state, where users can call the contract and add transactions. The second is the `finalization` state, where those calls are placed into a pre-defined order and state changes resulting from them occur.
 
+Essentially, this scheme is a commit-reveal scheme, but with the ordering of each transaction being pre-determined. The effects of each reveal are reversible if violation of ordering has been found.
+
 ## `makeCalls` state
 
 When the contract is in this state, users can make calls to the contract and have them placed into an array/mapping which keeps them until the `finalization` state is reached. The array used can be a 2-D mapping, with the first dimension being the address making the call, and the second dimension being an index for what order to make those calls in. This allows users to make a set of calls rather than just a single one. The user can place calls into this mapping in whichever spot they choose regarding the second dimension, to order contract calls in the manner they prefer. Once these calls are stored, they can be deleted by the user up until the end of the `makeCalls` period, but not within the `finalization` period. This is keep users from selectively omitting transactions for malicious reasons.
