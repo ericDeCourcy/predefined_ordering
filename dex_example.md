@@ -8,6 +8,7 @@ In the application of a pre-defined ordering scheme for a decentralized exchange
 - transactions will not be processed in the order they come in. The logic of the protocol should be able to determine final state as well as whether transactions even "clear"
 - the protocol will not be able to wait on a user to reveal and process thier own transactions. Ample time should be given for users to do so, as these transactions may cost significant gas. Consider allowing more blocks for processing than submission.
 - consider limiting number of submissions per round in order to prevent the issue mentioned above
+- consider implementing a flat fee for orders, which the user will never recieve. Otherwise, they have the opportunity to submit tons of orders to increase thier chances of front-running. (if there's 1 honest order and 99 front-runner orders, the front-runner has a 99% chance to be successful)
 
 # DEX functionality
 
@@ -48,8 +49,7 @@ DEX's can be abstracted as an accounting ledger, managing values which represent
 
 This and the REVEAL stage should NOT be combined, as after the order-reveal stage is the cutoff for user reveals and initaites the beginning of the process stage. This stage is very short.
 
-??? Should this stage come before reveal or after
-  I think it should come after, because it prevents non-reveals due to users knowing thier transaction will be in a certain order
+This stage should come after the reveal stage, because it prevents non-reveals due to users knowing thier transaction will be in a certain order
 
 ## Process Stage
 
@@ -72,7 +72,7 @@ This and the REVEAL stage should NOT be combined, as after the order-reveal stag
 
 
 ## next-round stage
-1)  Contract owner kills process stake via some call
+1)  Contract owner kills process stage via some call
 2)  all balance changes are finalized
 3)  roundNum increments
 4)  totalQuitterStakes = 0
