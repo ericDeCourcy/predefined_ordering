@@ -12,7 +12,9 @@ When the contract is in this state, users can make calls to the contract and hav
 
 After the contract transitions to the `finalization` state, an order for the contract calls is determined and set. This can either be pre-discussed and understood, such as starting with the user with the lowest address, starting with the user that was previously last, or doing some sort of round-robin style in which the first user rotates through all users.
 
-While in this state, and after an order is set, either an administrator for the contract or an average user is able to call a function which executes so many calls in the order that is determined. This should be done until all of the calls created during the previous `makeCalls` state are executed. The ability to somehow manage when calls result in a revert should exist, otherwise the queue could be stalled by an intentionally bad call.
+While in this state, and after an order is set, each user can submit thier transaction for processing. For each submitted transaction, all changes are logged. If a userA can prove that another user has submitted already, but with a later order than userA, the original submitter's changes are reversed, and userA's changes are applied and logged.
+
+It should be ensure that, since this state may require more `gas`, it should potentially be allowed more time than the  `makeCalls` state.
 
 # NOTES
 
