@@ -16,7 +16,7 @@ import "SafeMath.sol";  //What a great library, wow
  * filling an order, or for market-buying (at least not within the code. Market buying could be implemented
  * by simply taking the best order).
  */
-contract predefinedDex {
+contract orderer {
     using SafeMath for uint256;
     
     /// @notice admin that controls revealing the ordering
@@ -113,14 +113,30 @@ contract predefinedDex {
         return keccak256(abi.encodePacked(_txnHash, orderReveal));
     }
     
-//TODO: Define all fn's below this line
-    function commitTxn
+//TODO: consider swapping this out with the "getSubmarineId" function from libsubmarine
+//TODO: incorporate gas price and limit into this function
+//TODO: actually write some code here
+    function commitTxn() public returns (uint256 index) 
+    {
+        //increment the commitIndex
+        //save to some structure, the msg.sender, msg.amount, the data associated with the transaction and the current block
+        //return the index of the commit within said structure
+    }
+    
+    
+//TODO: Define all fn's below this line    
     function revealTxn
-    function checkRevealedTxn   //checks that user is able to actually do this transaction. Checked up transaction reveal
-    function checkStake         //checks that the user either has the ability to set a stake given this transaction
+    function checkRevealedTxn   //checks that user is able to actually do this transaction. Checked upon transaction reveal
+    function checkStake         //checks that the user's stake is enough given thier transaction
     function processTxn         //callable by ANY user on ANY txn, to disincentivize people commiting tx's they may not want to reveal
     function takeFee            //callable by admin to take the fee of anyone who doesn't reveal or process, and discards txn
     function swapFunds          //internal, called on SOME processTxn calls, performs a swap if the txn was successful
     function checkProcessSuccess    //internal, checks that the txn revealed was actually successful, may call 'swapfunds'
     function endProcessRound    //increments the round counter and changes current state to start new round
+    
+//TODO: implement another contract, called testDex.sol. Have this contract perform delegate calls to that
+
+//TODO: consider utilizing the submarine send library, with the added feature of disallowing people to have thier transactions go through after the randomization order has been set.
+//      This means that, if you want your transaction to work (and to get your money back) you MUST reveal your txn before the order is broadcast
+//      This prevents people from weighing the odds of whether it'd be better or worse to commit thier txn
         
